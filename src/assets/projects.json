@@ -25,7 +25,7 @@
       "description": "Développé avec PHP Bootstrap Mysql (MVC)"
     },
     {
-      "preview": "assets/media/projects/surp.PNG",
+      "preview": "assets/media/projects/surp.png",
       "created_at": "2021",
       "name": "Aplication surpoids ",
       "description": "Au seine de l'entreprise Yalidine Express avec Angular bootstrap 5 NestJs Typeorm Postgresql"
