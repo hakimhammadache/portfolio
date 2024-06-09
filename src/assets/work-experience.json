@@ -1,0 +1,74 @@
+{
+  "work": [
+ 
+    {
+      "date": "Aout - September 2019",
+      "title": "Maintenance et vente matériel informatique",
+      "description": "",
+      "stack": [
+        "Pc bureutique",
+        "Pc portable",
+        "Softwares",
+        "Imprimantes",
+        "Accessoire",
+        "Consommable"
+      ]   
+    },
+    {
+      "date": "2020 ",
+      "title": "Stage pratique à la SNTF",
+      "description": "J'ai apris des connaisance avancé en programmation et étude de projet en travaillon sur \nSysteme d'information géographique de gestion d'inventaire.",
+      "stack": [
+        "MVC",
+        "HTML",
+        "CSS",
+        "JAVASCRIPT",
+        "PHP",
+        "MySQL",
+        "Bootstrap 4",
+        "OPENSTREETMAP"
+      ]
+    },
+      {
+        "date": "Mars 2021 - Avril 2023",
+        "title": "Développeur à Yalidine Express",
+        "description": "",
+        "stack": [
+          "HTML",
+          "CSS",
+          "JAVASCRIPT",
+          "Angular",
+          "NestJs",
+          "Mysql", 
+          "Postgresql",
+          "Typeorm",
+          "TailwindCSS",
+          "Bootstrap 4-5"
+        ]
+      },
+      {
+        "date": "Mai 2023 - present",
+        "title": "Administrateur Base de données à OURQUILANE",
+        "description": "Administrateur Base de données et developpeur",
+        "stack": [
+          "Merise",
+          "SQL",
+          "NoSQL",
+          "Mysql",
+          "Postgresql",
+          "MongoDB",
+          "Typeorm",
+          "HTML",
+          "CSS",
+          "JAVASCRIPT",
+          "Angular",
+          "NestJs",
+          "TailwindCSS",
+          "Bootstrap 4-5"
+        
+        
+        ]
+      }
+
+  ]
+}

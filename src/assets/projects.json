@@ -1,0 +1,53 @@
+{
+  "projects": [
+    {
+      "preview": "assets/media/projects/bib.png",
+      "created_at": "2018",
+      "name": " Application web gestion de bibliothéque et réservation du livres",
+      "description": "Développé par un groupe de 4 personnes, avec HTML CSS JS PHP MYSQL"
+    },
+    {
+      "preview": "assets/media/projects/cpr.png",
+      "created_at": "2019",
+      "name": "Développement d'un systeme d'information, Compagnie aiérienne virtuelle (GoldenEagle)",
+      "description": "Développé par un groupe de 15 personnes dévisé en sous groupes Front-end, Backend, Database, Publicité(Front-end)"
+    },
+    {
+      "preview": "assets/media/projects/ecom.png",
+      "created_at": "2020",
+      "name": "Application web e-commerce",
+      "description": "Développé avec Laravel bootstrap Mysql"
+    },
+    {
+      "preview": "assets/media/projects/sntf.png",
+      "created_at": "2020",
+      "name": "System d'information géographique de gestion du patrimoines SNTF",
+      "description": "Développé avec PHP Bootstrap Mysql (MVC)"
+    },
+    {
+      "preview": "assets/media/projects/surp.png",
+      "created_at": "2021",
+      "name": "Aplication surpoids ",
+      "description": "Au seine de l'entreprise Yalidine Express avec Angular bootstrap 5 NestJs Typeorm Postgresql"
+    },
+    {
+      "preview": "assets/media/projects/capt_livraison.png",
+      "created_at": "2021 - 2022",
+      "name": "Systeme d'information de gestion des operations logistiques et finance",
+      "description": "Au seine de l'entreprise Yalidine Express avec Angular bootstrap 5 template Nazox NestJs Typeorm Postgresql"
+    },
+    {
+      "preview": "assets/media/projects/capt_itop.png",
+      "created_at": "2023 - 2024",
+      "name": "Systeme d'information de gestion de matériaux informatiques et inventaire",
+      "description": "Au seine de l'entreprise OURQUILANE avec Angular TailwindCSS template fuse NestJs Typeorm Postgresql"
+    }
+    ,
+    {
+      "preview": "assets/media/projects/capt_hrforce.png",
+      "created_at": "2024",
+      "name": "Systeme d'information de gestion des ressources humaines",
+      "description": "Au seine de l'entreprise OURQUILANE avec Angular TailwindCSS template fuse NestJs Typeorm Postgresql"
+    }
+  ]
+}
