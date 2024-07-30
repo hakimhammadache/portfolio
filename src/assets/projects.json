@@ -37,6 +37,12 @@
       "description": "Au seine de l'entreprise Yalidine Express avec Angular bootstrap 5 template Nazox NestJs Typeorm Postgresql"
     },
     {
+      "preview": "assets/media/projects/reclam.png",
+      "created_at": "2022 - 2023",
+      "name": "Systeme d'information de gestion de réclamations clients (Service client)",
+      "description": "Au seine de l'entreprise Yalidine Express avec Angular TailwindCSS template fuse NestJs Typeorm Postgresql"
+    },
+    {
       "preview": "assets/media/projects/capt_itop.png",
       "created_at": "2023 - 2024",
       "name": "Systeme d'information de gestion de matériaux informatiques et inventaire",
@@ -49,5 +55,6 @@
       "name": "Systeme d'information de gestion des ressources humaines",
       "description": "Au seine de l'entreprise OURQUILANE avec Angular TailwindCSS template fuse NestJs Typeorm Postgresql"
     }
+
   ]
 }
