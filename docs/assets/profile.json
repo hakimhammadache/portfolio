@@ -1,0 +1,47 @@
+{
+  "email": "hammadachehakim1@gmail.com",
+  "location": "Alger, ALgerie",
+  "name": "HAMMADACHE Hakim",
+  "phone": "055457143",
+  "avatar": "assets/image/pic.JPG",
+  "education": [
+    {
+      "title": "Matser 2 ingénieurie des systemes d'information",
+      "meta": "Université MOULOUD MAMERI Tizi Ouzou, 2018-2020"
+    },
+    {
+      "title": "2018 : Obtention du diplôme de Licence Académique en système informatique",
+      "meta": "Université MOULOUD MAMERI Tizi Ouzou, 2015-2020"
+    },
+    {
+      "title": "2019 : Maintenance informatique et réseaux",
+      "meta": "Ecole technique Tizi Ouzou"
+    },
+    {
+      "title": "2019 : Formations en ligne (FUN MOOK)",
+      "meta": "Accessibilité numérique.\n Comprendre le cœur d’internet. \n Ethique de la recherche.\n  S’initier à la fabrication numérique."
+    }
+  ],
+  "about": "Organisé, sérieux, aventureux, sociable, sens de responsabilité et esprit de groupe",
+  "socials": [
+    {
+      "name": "hammadachehakim1@gmail.com",
+      "link": "mailto:hammadachehakim@gmail.com",
+      "icon": "fa fa-envelope"
+    },
+    {
+      "name": "+213 554 57 14 13",
+      "icon": "fa fa-phone"
+    },
+    {
+      "name": "LinkedIn",
+      "link": "https://www.linkedin.com/in/hakim-hammadache-aa11611a2/",
+      "icon": "fab fa-linkedin"
+    },
+    {
+      "name": "Github",
+      "link": "https://github.com/hakimhammadache",
+      "icon": "fab fa-github"
+    }
+  ]
+}
