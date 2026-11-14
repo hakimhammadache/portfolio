@@ -1,169 +1,410 @@
-<div class="rh-bg">
-  <div class="container-fluid mb-4">
-    <div class="row">
-      <div class="col-lg-4 ">
-        <div class="sticky-top">
-          <div class="row mt-3 ">
-            <div class="col-lg-12">
-              <div class="card rh-card shadow-lg">
-                <div class="card-body text-center">
-                  <h4>Ingénierie des systèmes d’information</h4>
-                  <hr class="m-0 mb-3">
-                  <div class="row mx-auto text-center">
-                    <div class="col-12">
-                      <img [src]="profile?.avatar" class="rh-profile-img border border-secondary" alt="...">
-                    </div>
-                    <div class="col-lg-12 my-auto ">
-                    <h4 >{{profile?.name}}</h4>
+<div class="portfolio" *ngIf="!isLoading; else loading">
+  <!-- Ambient Background Effects -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
 
-                      <p >Informaticien, passionné par
-                        l’informatique et les nouvelles technologies, 28 ans, célibataire , organisé, sérieux, 
-                        sens de responsabilité</p>
-                        <button class="btn btn-secondary mt-1" (click)="downloadResume()">
-                          <i class="fas fa-cloud-download-alt"></i>
-                          <span class="ml-2">
-                            Télécharger CV PDF </span> </button>
+  <!-- Navigation Floating -->
+  <nav class="portfolio-nav" [class.nav-scrolled]="isScrolled">
+    <div class="nav-logo" (click)="scrollToSection('hero')">
+      <span class="logo-bracket">&lt;</span>
+      <span class="logo-text">{{ profile?.name?.split(' ')[0] || 'Portfolio' }}</span>
+      <span class="logo-bracket">/&gt;</span>
+    </div>
+    
+    <div class="nav-links">
+      <button 
+        *ngFor="let section of navSections" 
+        (click)="scrollToSection(section.id)" 
+        class="nav-link"
+        [class.active]="activeSection === section.id"
+      >
+        <span class="nav-indicator"></span>
+        {{ section.label }}
+      </button>
+    </div>
+    
+    <div class="nav-actions">
+      <button class="btn btn-nav-cta" (click)="scrollToSection('contact')">
+        <span class="btn-pulse"></span>
+        Disponible
+      </button>
+    </div>
+  </nav>
 
-                     </div>
-                  </div>
-                </div>
-              </div>
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section" *ngIf="hasProfile()">
+    <div class="hero-container">
+      <!-- Floating Elements -->
+      <div class="hero-floaters">
+        <div class="floater floater-1">⚡</div>
+        <div class="floater floater-2">🚀</div>
+        <div class="floater floater-3">💎</div>
+        <div class="floater floater-4">✨</div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Disponible pour de nouveaux projets</span>
+        </div>
+
+        <div class="avatar-wrapper">
+          <div class="avatar-ring">
+            <div class="ring-rotate"></div>
+          </div>
+          <img 
+            [src]="profile.avatar" 
+            [alt]="'Photo de ' + profile.name"
+            class="hero-avatar"
+            loading="lazy"
+            (error)="handleImageError($event, 'avatar')"
+          />
+          <div class="avatar-status">
+            <span class="status-dot"></span>
+          </div>
+        </div>
+        
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="title-line">Bonjour, je suis</span>
+            <span class="title-name">{{ profile.name }}</span>
+            <span class="title-cursor">|</span>
+          </h1>
+          
+          <p class="hero-subtitle">{{ getBio() }}</p>
+          
+          <div class="hero-metrics">
+            <div class="metric" *ngIf="featuredProjects?.projects?.length">
+              <span class="metric-value">{{ featuredProjects.projects.length }}+</span>
+              <span class="metric-label">Projets</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric" *ngIf="workExperience?.work?.length">
+              <span class="metric-value">{{ workExperience.work.length }}+</span>
+              <span class="metric-label">Expériences</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric" *ngIf="skills?.top_skills?.length">
+              <span class="metric-value">{{ skills.top_skills.length }}+</span>
+              <span class="metric-label">Technologies</span>
             </div>
           </div>
 
-
-      
-          <div class="row mt-3 ">
-            <div class="col-lg-12">
-              <div class="card rh-card shadow-lg">
-                <div class="card-body">
-                  <div class="col-lg-12 my-auto rh-profile-info">
-                  <h5>Contact</h5>
-                  <hr class="m-0 mb-3">
-                    <p class="m-0">{{profile?.location}} </p>
-                    <ng-container *ngFor="let social of profile?.socials">
-                      <a  [href]="social?.link" ><span class="mr-2"><i [ngClass]="social?.icon" aria-hidden="true"></i>
-                      </span>{{social?.name}}</a><br>
-                    </ng-container>
-                  </div>
-                </div>
-              </div>
+          <div class="hero-info-chips">
+            <div class="info-chip" *ngIf="getLocation()">
+              <span class="chip-icon">📍</span>
+              <span>{{ getLocation() }}</span>
+            </div>
+            <div class="info-chip" *ngIf="getEmail()">
+              <span class="chip-icon">✉️</span>
+              <span>{{ getEmail() }}</span>
+            </div>
+            <div class="info-chip" *ngIf="getPhone()">
+              <span class="chip-icon">📱</span>
+              <span>{{ getPhone() }}</span>
             </div>
           </div>
-
-  
+          
+          <div class="hero-actions">
+            <button 
+              (click)="downloadResume()" 
+              class="btn btn-primary-glow"
+              [disabled]="isResumeDownloading"
+            >
+              <span class="btn-shine"></span>
+              <span class="btn-content">
+                <span *ngIf="!isResumeDownloading">📄 Télécharger CV</span>
+                <span *ngIf="isResumeDownloading">
+                  <span class="btn-spinner"></span> Téléchargement...
+                </span>
+              </span>
+            </button>
+            
+            <button class="btn btn-glass" (click)="scrollToSection('projects')">
+              🔥 Voir mes projets
+            </button>
+            
+            <button class="btn btn-ghost" (click)="scrollToSection('contact')">
+              ✉️ Me contacter
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="col-lg-8">
-        <div class="row mt-3">
-          <div class="col-lg-12">
-            <div class="card rh-card shadow-lg">
-              <div class="card-body">
-                <h5>FORMATIONS</h5>
-                <hr class="m-0 mb-3">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <ng-container *ngFor="let school of profile?.education">
-                      <h5>{{school?.title}}</h5>
-                      <p><small>{{school?.meta}}</small></p>
-                    </ng-container>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills-section" *ngIf="hasSkills()">
+    <div class="section-header">
+      <span class="section-tag">💡 Expertise</span>
+      <h2 class="section-title">Stack <span class="gradient-text">Technique</span></h2>
+      <p class="section-subtitle">Technologies et outils que je maîtrise au quotidien</p>
+    </div>
+    
+    <div class="skills-showcase">
+      <div class="skills-orbit">
+        <div 
+          *ngFor="let skill of skills.top_skills; let i = index"
+          class="skill-card"
+          [style.animation-delay]="i * 0.1 + 's'"
+        >
+          <div class="skill-glow" [ngClass]="getSkillClass(i)"></div>
+          <span class="skill-name">{{ skill }}</span>
+          <div class="skill-level">
+            <div class="level-bar" [style.width]="getSkillLevel(i) + '%'"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-
-
-        <div class="row mt-3">
-          <div class="col-lg-12">
-            <div class="card rh-card shadow-lg">
-              <div class="card-body">
-                <h5>EXPERIENCES PROFISSIONNELLES</h5>
-                <hr class="m-0 mb-3">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="mb-2" *ngFor="let work of workExperience?.work">
-                      <p><small>{{work?.date}}</small></p>
-                      <h5>{{work?.title}}</h5>
-                      <p style="white-space: pre-wrap;" class="card-text" [innerHTML]="work?.description"></p>
-                      <a  class="mr-1 rh-skill" *ngFor="let skill of work?.stack" >{{skill}}</a>
-                      <hr class="m-0 mt-3">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <!-- Experience Section -->
+  <section id="experience" class="experience-section" *ngIf="hasExperience()">
+    <div class="section-header">
+      <span class="section-tag">💼 Parcours</span>
+      <h2 class="section-title">Expérience <span class="gradient-text">Professionnelle</span></h2>
+      <p class="section-subtitle">Mon parcours et mes réalisations clés</p>
+    </div>
+    
+    <div class="experience-timeline">
+      <div class="timeline-line">
+        <div class="timeline-progress"></div>
+      </div>
+      
+      <div 
+        *ngFor="let exp of workExperience.work; let i = index"
+        class="exp-card"
+        [class.exp-right]="!isEven(i)"
+      >
+        <div class="exp-connector">
+          <div class="exp-dot">
+            <div class="dot-ring"></div>
+            <div class="dot-core"></div>
           </div>
         </div>
+        
+        <div class="exp-content">
+          <div class="exp-header">
+            <span class="exp-date">
+              <span class="date-icon">📅</span>
+              {{ exp.date }}
+            </span>
+          </div>
+          
+          <h3 class="exp-title">{{ exp.title }}</h3>
+          
+          <div class="exp-description" 
+               *ngIf="exp.description" 
+               [innerHTML]="formatDescription(exp.description)">
+          </div>
+          
+          <div class="exp-stack" *ngIf="exp.stack && exp.stack.length > 0">
+            <span 
+              *ngFor="let tech of exp.stack; let techIndex = index" 
+              class="stack-chip"
+              [style.animation-delay]="techIndex * 0.05 + 's'"
+            >
+              {{ tech }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="row mt-3">
-          <div class="col-lg-12">
-            <div class="card rh-card shadow-lg">
-              <div class="card-body">
-                <h5>PROJETS</h5>
-                <hr class="m-0 mb-3">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="card mb-3" *ngFor="let project of featuredProjects?.projects">
-                      <div class="row no-gutters">
-                        <div class="col-md-4">
-                        <div
-                          [ngClass]="{'rh-preview-image': !showMobileImages, 'rh-preview-image-mobile': showMobileImages}"
-                          [ngStyle]="{
-                            'background-image': 'url(' + project?.preview + ')'
-                          }">
-                        </div>
-                        </div>
-                        <div class="col-md-8">
-                          <div class="card-body">
-                            <h5 class="card-title">{{project?.name}}</h5>
-                            <p>{{project?.created_at}}</p>
-                            <p style="white-space: pre-wrap;" class="card-text" [innerHTML]="project?.description | linkify"></p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section" *ngIf="hasProjects()">
+    <div class="section-header">
+      <span class="section-tag">🚀 Réalisations</span>
+      <h2 class="section-title">Projets <span class="gradient-text">Remarquables</span></h2>
+      <p class="section-subtitle">Applications et systèmes que j'ai conçus et développés</p>
+    </div>
+    
+    <div class="projects-masonry">
+      <article 
+        *ngFor="let project of featuredProjects.projects; let i = index"
+        class="project-card"
+        [class.project-featured]="i === 0"
+      >
+        <div class="project-visual">
+          <div 
+            class="project-bg"
+            [style.background-image]="getProjectImage(project)"
+          ></div>
+          <div class="project-gradient"></div>
+          
+          <div class="project-floating-date">
+            {{ formatDate(project.created_at) }}
+          </div>
+        </div>
+        
+        <div class="project-body">
+          <div class="project-meta-row">
+            <span class="project-category">{{ getProjectCategory(project) }}</span>
+            <span class="project-year">{{ formatDate(project.created_at) }}</span>
+          </div>
+          
+          <h3 class="project-title">{{ project.name }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          
+          <div class="project-footer">
+            <div class="project-tech" *ngIf="project.language">
+              <span class="tech-dot" [style.background]="getLanguageColor(project.language)"></span>
+              {{ project.language }}
             </div>
           </div>
         </div>
         
-        <div class="row mt-3">
-          <div class="col-lg-12">
-            <div class="card rh-card shadow-lg">
-              <div class="card-body">
-                <h5>COMPETENCES</h5>
-                <hr class="m-0 mb-3">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <a  class="mr-1 rh-skill" *ngFor="let skill of skills?.top_skills" >{{skill}}</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="project-shine"></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="education-section" *ngIf="hasEducation()">
+    <div class="section-header">
+      <span class="section-tag">🎓 Formation</span>
+      <h2 class="section-title">Parcours <span class="gradient-text">Académique</span></h2>
+      <p class="section-subtitle">Mes formations et certifications</p>
+    </div>
+    
+    <div class="education-grid">
+      <div 
+        *ngFor="let edu of profile.education; let i = index" 
+        class="edu-card"
+        [style.animation-delay]="i * 0.15 + 's'"
+      >
+        <div class="edu-icon-wrapper">
+          <div class="edu-icon-bg"></div>
+          <span class="edu-icon">🎓</span>
         </div>
-        <!-- <div class="row mt-3 ">
-          <div class="col-lg-12">
-            <div class="card rh-card shadow-lg">
-              <div class="card-body">
-                <h5>A propos de moi</h5>
-                <hr class="m-0 mb-3">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <p style="white-space: pre-wrap;" class="card-text" [innerHTML]="profile?.about"></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
+        
+        <div class="edu-content">
+          <h3 class="edu-title">{{ edu.title }}</h3>
+          <p class="edu-meta">{{ edu.meta }}</p>
+        </div>
+        
+        <div class="edu-number">{{ (i + 1).toString().padStart(2, '0') }}</div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="section-header">
+      <span class="section-tag">📬 Contact</span>
+      <h2 class="section-title">Travaillons <span class="gradient-text">Ensemble</span></h2>
+      <p class="section-subtitle">Discutons de votre prochain projet</p>
+    </div>
+    
+    <div class="contact-layout">
+      <!-- Contact Cards -->
+      <div class="contact-cards">
+        <div class="contact-card" *ngIf="getLocation()">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">📍</span>
+          </div>
+          <div class="card-info">
+            <span class="card-label">Localisation</span>
+            <span class="card-value">{{ getLocation() }}</span>
+          </div>
+        </div>
+        
+        <div class="contact-card" *ngIf="getEmail()">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">✉️</span>
+          </div>
+          <div class="card-info">
+            <span class="card-label">Email</span>
+            <span class="card-value">{{ getEmail() }}</span>
+          </div>
+        </div>
+        
+        <div class="contact-card" *ngIf="getPhone()">
+          <div class="card-icon-wrapper">
+            <span class="card-icon">📱</span>
+          </div>
+          <div class="card-info">
+            <span class="card-label">Téléphone</span>
+            <span class="card-value">{{ getPhone() }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- CTA Banner -->
+      <div class="cta-banner">
+        <div class="cta-glow"></div>
+        <div class="cta-content">
+          <div class="cta-icon">🤝</div>
+          <h3 class="cta-title">Prêt à collaborer ?</h3>
+          <p class="cta-text">
+            Je suis ouvert aux nouvelles opportunités et projets passionnants.
+            N'hésitez pas à me contacter !
+          </p>
+          <div class="cta-buttons">
+            <button class="btn btn-primary-glow" (click)="downloadResume()" [disabled]="isResumeDownloading">
+              <span class="btn-shine"></span>
+              <span class="btn-content">📄 Télécharger mon CV</span>
+            </button>
+            <button class="btn btn-glass" (click)="scrollToSection('hero')">
+              ⬆️ Retour en haut
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="portfolio-footer" *ngIf="hasProfile()">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">
+          <span class="logo-bracket">&lt;</span>
+          {{ profile.name?.split(' ')[0] }}
+          <span class="logo-bracket">/&gt;</span>
+        </span>
+        <p class="footer-tagline">Développeur Full Stack & Administrateur Base de Données</p>
+      </div>
+      
+      <div class="footer-divider"></div>
+      
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 — {{ profile.name }}.</p>
+        <div class="footer-links" *ngIf="hasSocials()">
+          <a 
+            *ngFor="let social of profile.socials"
+            [href]="social.link || '#'"
+            [target]="social.link ? '_blank' : '_self'"
+            class="footer-social"
+          >
+            <i [ngClass]="social.icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </div>
+
+<ng-template #loading>
+  <div class="loading-overlay">
+    <div class="loading-container">
+      <div class="loading-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-text">H</span>
+        <span class="logo-bracket">/&gt;</span>
+      </div>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+      <p class="loading-text">Chargement du portfolio...</p>
+    </div>
+  </div>
+</ng-template>
